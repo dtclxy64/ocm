@@ -12,9 +12,10 @@ hubctx="kind-${hub}"
 c1ctx="kind-${c1}"
 c2ctx="kind-${c2}"
 
-kind create cluster --name "${hub}"
-kind create cluster --name "${c1}"
-kind create cluster --name "${c2}"
+# using v1.22.17 Kind node images for compatibility with KubeVela
+kind create cluster --name "${hub}" --image kindest/node:v1.22.17
+kind create cluster --name "${c1}" --image kindest/node:v1.22.17
+kind create cluster --name "${c2}" --image kindest/node:v1.22.17
 
 echo "Initialize the ocm hub cluster\n"
 clusteradm init --wait --context ${hubctx}
