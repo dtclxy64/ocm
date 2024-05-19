@@ -32,10 +32,7 @@ export KUBECONFIG=~/.kube/cluster2.kubeconfig
 $(echo ${joincmd} --force-internal-endpoint-lookup --wait --context ${c2ctx} | sed "s/<cluster_name>/$c2/g")
 
 echo "Accept join of cluster1 and cluster2"
-clusteradm accept --context ${hubctx} --clusters ${c1},${c2} --wait
-
-echo "Accept join of cluster1"
 export KUBECONFIG=~/.kube/hub.kubeconfig
-clusteradm accept --context ${hubctx} --clusters ${c1} --wait
+clusteradm accept --context ${hubctx} --clusters ${c1},${c2} --wait
 
 kubectl get managedclusters --all-namespaces --context ${hubctx}
